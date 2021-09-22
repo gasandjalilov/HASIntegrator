@@ -4,6 +4,7 @@
     <property scope="context" name="log.directory" value="/logs"/>
     <property scope="context" name="log.fileName" value="HASIntegrator"/>
     <springProperty scope="context" name="app_name" source="spring.application.name"/>
+    <springProperty scope="context" name="logstash" source="logstash.endpoint"/>
     <springProperty scope="context" name="app_port" source="server.port"/>
 
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
@@ -13,7 +14,7 @@
     </appender>
 
     <appender name="STASH" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
-        <destination>10.2.37.26:5044</destination>
+        <destination>${logstash}</destination>
         <!-- encoder is required -->
         <encoder class="net.logstash.logback.encoder.LogstashEncoder">
             <provider class="net.logstash.logback.composite.loggingevent.ArgumentsJsonProvider"/>
