@@ -10,6 +10,8 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @SpringBootApplication
 public class HasInterfaceApplication {
 
+
+	// CI/CD included
 	public static void main(String[] args) {
 		SpringApplication.run(HasInterfaceApplication.class, args);
 	}
