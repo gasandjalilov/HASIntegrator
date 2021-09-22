@@ -13,4 +13,6 @@ public interface ESBMainController {
     Mono<RestResponse> getProteiPrclPriceResponse(String msisdn,int prcl);
 
     Mono<RestResponse> setProteiPrclResponse(String msisdn, int prcl);
+
+    Mono<RestResponse> getPassportData(String msisdn);
 }

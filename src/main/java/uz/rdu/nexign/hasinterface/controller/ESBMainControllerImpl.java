@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Mono;
 import uz.rdu.nexign.hasinterface.interfaces.ESBMainController;
 import uz.rdu.nexign.hasinterface.model.rest.RestResponse;
-import uz.rdu.nexign.hasinterface.service.NexignService;
+import uz.rdu.nexign.hasinterface.service.hanlder.has.NexignService;
 
 @Slf4j
 @RestController
@@ -45,5 +45,12 @@ public class ESBMainControllerImpl implements ESBMainController {
     @Override
     public Mono<RestResponse> setProteiPrclResponse(String msisdn, int prcl){
         return nexignService.setProteiPrclResponse(msisdn, prcl);
+    }
+
+    @ApiOperation(value = "Get Passport Data by MSISDN", notes = "Returns Passport Data", tags = { "subscriber" })
+    @GetMapping(value = "passport" ,params = { "msisdn"})
+    @Override
+    public Mono<RestResponse> getPassportData(String msisdn){
+        return nexignService.getPassportData(msisdn);
     }
 }

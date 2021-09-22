@@ -17,6 +17,6 @@ import java.io.Serializable;
 public class CredentialAuthResponse implements Serializable {
 
     @XmlElement(name = "SESSION_ID")
-    private String hostname;
+    private String session_id;
 
 }

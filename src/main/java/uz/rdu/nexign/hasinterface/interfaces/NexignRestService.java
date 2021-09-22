@@ -12,4 +12,6 @@ public interface NexignRestService {
     Mono<RestResponse> getProteiPrclPriceResponse(String msisdn,int prcl);
 
     Mono<RestResponse> setProteiPrclResponse(String msidn, int prcl);
+
+    Mono<RestResponse> getPassportData(String msisdn);
 }
