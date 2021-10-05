@@ -1,4 +1,4 @@
-package uz.rdu.nexign.hasinterface.model.DAO.secondaryDS.cOne;
+package uz.rdu.nexign.hasinterface.model.DAO.secondaryDS;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.*;
@@ -28,6 +28,8 @@ public class SubscriberTerminationData implements Serializable {
     private int code;
 
     private String message;
+
+    private String username;
 
     @CreatedDate
     private Date createDate;

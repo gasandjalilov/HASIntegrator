@@ -20,29 +20,28 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Configuration
-@EntityScan("uz.rdu.nexign.hasinterface.model.DAO.secondaryDS")
+@EntityScan("uz.rdu.nexign.hasinterface.model.DAO.tertiaryDS")
 @EnableTransactionManagement
 @EnableJpaRepositories(
-        entityManagerFactoryRef = "secondaryEntityManagerFactory",
+        entityManagerFactoryRef = "tertiaryEntityManagerFactory",
         transactionManagerRef = "secondaryTransactionManager",
-        basePackages = {"uz.rdu.nexign.hasinterface.repository.secondaryDS"})
-public class SecondaryDataSourceConfiguration {
-
-    @Bean(name = "secondaryDataSourceProperties")
-    @ConfigurationProperties("spring.datasource-secondary")
+        basePackages = {"uz.rdu.nexign.hasinterface.repository.tertiaryDS"})
+public class TertiaryDataSourceConfiguration {
+    @Bean(name = "tertiaryDataSourceProperties")
+    @ConfigurationProperties("spring.datasource-tertiary")
     public DataSourceProperties secondaryDataSourceProperties() {
         return new DataSourceProperties();
     }
 
-    @Bean(name = "secondaryDataSource")
-    @ConfigurationProperties("spring.datasource-secondary.configuration")
-    public DataSource secondaryDataSource(@Qualifier("secondaryDataSourceProperties") DataSourceProperties secondaryDataSourceProperties) {
+    @Bean(name = "tertiaryDataSource")
+    @ConfigurationProperties("spring.datasource-tertiary.configuration")
+    public DataSource secondaryDataSource(@Qualifier("tertiaryDataSourceProperties") DataSourceProperties secondaryDataSourceProperties) {
         return secondaryDataSourceProperties.initializeDataSourceBuilder().type(HikariDataSource.class).build();
     }
 
-    @Bean(name = "secondaryEntityManagerFactory")
+    @Bean(name = "tertiaryEntityManagerFactory")
     public LocalContainerEntityManagerFactoryBean secondaryEntityManagerFactory(
-            EntityManagerFactoryBuilder secondaryEntityManagerFactoryBuilder, @Qualifier("secondaryDataSource") DataSource secondaryDataSource) {
+            EntityManagerFactoryBuilder secondaryEntityManagerFactoryBuilder, @Qualifier("tertiaryDataSource") DataSource secondaryDataSource) {
 
         Map<String, String> secondaryJpaProperties = new HashMap<>();
         secondaryJpaProperties.put("hibernate.dialect", "org.hibernate.dialect.Oracle10gDialect");
@@ -50,15 +49,15 @@ public class SecondaryDataSourceConfiguration {
 
         return secondaryEntityManagerFactoryBuilder
                 .dataSource(secondaryDataSource)
-                .packages("uz.rdu.nexign.hasinterface.model.DAO.secondaryDS")
-                .persistenceUnit("secondaryDataSource")
+                .packages("uz.rdu.nexign.hasinterface.model.DAO.tertiaryDS")
+                .persistenceUnit("tertiaryDataSource")
                 .properties(secondaryJpaProperties)
                 .build();
     }
 
-    @Bean(name = "secondaryTransactionManager")
+    @Bean(name = "tertiaryTransactionManager")
     public PlatformTransactionManager secondaryTransactionManager(
-            @Qualifier("secondaryEntityManagerFactory") EntityManagerFactory secondaryEntityManagerFactory) {
+            @Qualifier("tertiaryEntityManagerFactory") EntityManagerFactory secondaryEntityManagerFactory) {
 
         return new JpaTransactionManager(secondaryEntityManagerFactory);
     }

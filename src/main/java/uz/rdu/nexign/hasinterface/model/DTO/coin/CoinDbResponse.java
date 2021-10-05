@@ -15,4 +15,6 @@ public class CoinDbResponse implements Serializable {
     private int code;
 
     private String message;
+
+    private String response;
 }

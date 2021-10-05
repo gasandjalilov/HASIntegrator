@@ -47,7 +47,7 @@ public class SecurityConfigurationKeycloak extends KeycloakWebSecurityConfigurer
     protected void configure(HttpSecurity http) throws Exception {
         super.configure(http);
         http.csrf().disable().authorizeRequests()
-                .antMatchers("/ui/**").authenticated()
+                .antMatchers("/ui/**").hasAuthority("front-office")
                 .antMatchers("/VAADIN/**","/PUSH/**", "/UIDL/**", "/vaadinServlet/UIDL/**", "/resources/**","/vaadinServlet/HEARTBEAT/**",
                         "/login", "/login**", "/login/**", "/manifest.json", "/icons/**", "/images/**",
                         "/frontend/**","/vaadinServlet/**",

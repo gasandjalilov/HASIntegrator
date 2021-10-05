@@ -8,7 +8,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.servlet.MockMvc;
 import uz.rdu.nexign.hasinterface.repository.mainDS.DefneDAORepository;
 import uz.rdu.nexign.hasinterface.service.c1.ProcedureRequestsImpl;
-import uz.rdu.nexign.hasinterface.service.coin.TerminationService;
+import uz.rdu.nexign.hasinterface.service.coin.CoinService;
 import uz.rdu.nexign.hasinterface.service.hanlder.has.NexignService;
 
 @AutoConfigureMockMvc
@@ -17,6 +17,9 @@ class HasInterfaceApplicationTests {
 
     @Autowired
     ProcedureRequestsImpl procedureRequests;
+
+    @Autowired
+    CoinService coinService;
 
     @Autowired
     NexignService nexignService;
@@ -34,7 +37,7 @@ class HasInterfaceApplicationTests {
     void contextLoads() {
         log.info("PROCESSING TESTS");
         log.info("PROCESSING TESTS");
-        log.info("PROCESSING TESTS: {}", procedureRequests.getDefneData("998931717736"));
+        log.info("PROCESSING TESTS: {}", coinService.terminateSubscriberFromCoinDB("998939781400","7"));
 
         //log.info("Data: {}", procedureRequests.getAllDefneData());
     }
